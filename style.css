@@ -1,0 +1,107 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: linear-gradient(135deg, #1f1c4a, #6a1b9a, #e91e63);
+  background-size: 300% 300%;
+  animation: bgMove 12s ease infinite;
+  overflow: hidden;
+  color: #fff;
+}
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.card {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 30px 24px;
+  width: min(92vw, 560px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.title { font-size: clamp(1.6rem, 5vw, 2.4rem); line-height: 1.3; }
+.title span {
+  background: linear-gradient(90deg, #ffeb3b, #ff9800, #ff4081);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.typed { min-height: 3.2em; margin: 14px 0 6px; font-size: 1.1rem; }
+
+/* Cake */
+.cake { position: relative; width: 220px; height: 190px; margin: 30px auto 10px; cursor: pointer; }
+.layer { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 12px; }
+.layer.top { bottom: 100px; width: 110px; height: 40px; background: #ff80ab; }
+.layer.middle { bottom: 55px; width: 160px; height: 46px; background: #f06292; }
+.layer.bottom { bottom: 10px; width: 210px; height: 50px; background: #ec407a; }
+.layer.top::before, .layer.middle::before, .layer.bottom::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px;
+  background: #fff; border-radius: 12px 12px 20px 20px; opacity: 0.9;
+}
+.plate { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 240px; height: 10px; background: #e0e0e0; border-radius: 6px; }
+
+.candles { position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%); display: flex; gap: 22px; }
+.candle { position: relative; width: 8px; height: 34px; background: repeating-linear-gradient(45deg, #fff, #fff 5px, #4fc3f7 5px, #4fc3f7 10px); border-radius: 3px; }
+.flame {
+  position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+  width: 12px; height: 20px;
+  background: radial-gradient(circle at 50% 70%, #fff59d, #ffb300 60%, transparent 70%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 0 14px 4px rgba(255, 193, 7, 0.7);
+  animation: flicker 0.25s infinite alternate;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.cake.out .flame { opacity: 0; transform: translateX(-50%) scale(0); animation: none; }
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(1) rotate(-3deg); }
+  to   { transform: translateX(-50%) scale(1.12) rotate(3deg); }
+}
+
+.hint { font-size: 0.9rem; opacity: 0.85; }
+
+button {
+  margin-top: 18px; padding: 12px 26px; font-size: 1rem; font-weight: 600;
+  border: none; border-radius: 30px; cursor: pointer; color: #fff;
+  background: linear-gradient(90deg, #ff4081, #ff9800);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+button:hover { transform: translateY(-3px) scale(1.04); }
+
+.wish { margin-top: 18px; min-height: 3em; font-size: 1.1rem; font-style: italic; }
+
+/* Balloons */
+.balloons { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.balloon {
+  position: absolute; bottom: -120px; width: 55px; height: 70px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.85;
+  animation: rise linear infinite;
+}
+.balloon::after {
+  content: ""; position: absolute; bottom: -28px; left: 50%;
+  width: 2px; height: 30px; background: rgba(255, 255, 255, 0.6);
+}
+@keyframes rise {
+  to { transform: translateY(-120vh) translateX(30px); }
+}
